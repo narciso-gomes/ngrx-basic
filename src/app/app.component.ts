@@ -1,4 +1,6 @@
+import { Person } from './shared/interfaces/person';
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,19 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'ngrx-basic';
+
+  people$: Observable<Person[]> = new Observable();
+
+  addNew() {
+
+  }
+
+  update(p: Person) {
+
+  }
+
+  delete(p: Person) {
+
+  }
+
 }
