@@ -1,4 +1,4 @@
-import { Person } from './../shared/interfaces/person';
+import { Person } from '../interfaces/person';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({

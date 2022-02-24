@@ -1,4 +1,4 @@
-import { Person } from './../shared/interfaces/person';
+import { Person } from '../interfaces/person';
 import { Action } from "@ngrx/store";
 
 export enum PersonActionTypes {
