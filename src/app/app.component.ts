@@ -1,9 +1,9 @@
 import { PersonNew } from './store/person.actions';
 import { AppState } from './store/index';
 import { Person } from './interfaces/person';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 // @ts-ignore
 import * as faker from 'faker';
 
@@ -12,11 +12,15 @@ import * as faker from 'faker';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
   people$: Observable<Person[]> = new Observable();
 
-  constructor(private store: Store<AppState>){}
+  constructor(private store: Store<AppState>) { }
+
+  ngOnInit(): void {
+    this.people$ = this.store.pipe(select('people'));
+  }
 
   addNew() {
     let person: Person = {
@@ -28,7 +32,7 @@ export class AppComponent {
       _id: new Date().getMilliseconds().toString()
     }
 
-    this.store.dispatch(new PersonNew({person}))
+    this.store.dispatch(new PersonNew({ person }))
   }
 
   update(p: Person) {

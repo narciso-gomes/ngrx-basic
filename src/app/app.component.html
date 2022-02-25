@@ -1,6 +1,6 @@
-<div fxLayout="colunm" fxLayoutAlign="start center">
+<div fxLayout="column" fxLayoutAlign="space-around center">
 
-  <div fxLayout="colunm" fxLayoutAlign="start stretch" fxFlex="70%">
+  <div fxLayout="column" fxLayoutAlign="start stretch" fxFlex="70%">
     <app-person
     *ngFor="let p of people$ | async"
     [person]="p"
