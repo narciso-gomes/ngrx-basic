@@ -1,4 +1,4 @@
-import { PersonNew } from './store/person.actions';
+import { PersonNew, PersonAll, PersonUpdate, PersonDelete } from './store/person.actions';
 import { AppState } from './store/index';
 import { Person } from './interfaces/person';
 import { Component, OnInit } from '@angular/core';
@@ -19,6 +19,7 @@ export class AppComponent implements OnInit {
   constructor(private store: Store<AppState>) { }
 
   ngOnInit(): void {
+    this.store.dispatch(new PersonAll());
     this.people$ = this.store.pipe(select('people'));
   }
 
@@ -36,11 +37,20 @@ export class AppComponent implements OnInit {
   }
 
   update(p: Person) {
+    console.log(p)
+    let person = { ...p }
+    person.name = faker.name.findName();
+    person.address = faker.address.streetAddress();
+    person.city = faker.address.city();
+    person.country = faker.address.country();
+    person.age = Math.round(Math.random() * 100);
+    console.log(person)
 
+    this.store.dispatch(new PersonUpdate({ person }))
   }
 
   delete(p: Person) {
-
+    this.store.dispatch(new PersonDelete({ id: p._id }))
   }
 
 }

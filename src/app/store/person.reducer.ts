@@ -18,7 +18,7 @@ export function reducer(state = initialState, action: fromPersonActions.PersonAc
     case fromPersonActions.PersonActionTypes.PERSON_UPDATE:
       let people = state.slice();
       let i = people.findIndex(p => p._id == action.payload.person._id);
-      if (i > 0) {
+      if (i >= 0) {
         people[i] = action.payload.person;
       }
       return people;
