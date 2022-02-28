@@ -4,8 +4,10 @@ import { Person } from './interfaces/person';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { select, Store } from '@ngrx/store';
+import * as fromPersonSelectors from './store/person.selectors'
 // @ts-ignore
 import * as faker from 'faker';
+
 
 @Component({
   selector: 'app-root',
@@ -20,7 +22,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(new PersonAll());
-    this.people$ = this.store.pipe(select('people'));
+    this.people$ = this.store.select(fromPersonSelectors.selectAll);
   }
 
   addNew() {
@@ -44,9 +46,8 @@ export class AppComponent implements OnInit {
     person.city = faker.address.city();
     person.country = faker.address.country();
     person.age = Math.round(Math.random() * 100);
-    console.log(person)
 
-    this.store.dispatch(new PersonUpdate({ person }))
+    this.store.dispatch(new PersonUpdate({ id: person._id, changes: person }));
   }
 
   delete(p: Person) {
